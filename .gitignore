@@ -10,3 +10,6 @@
 
 #linux ignore
 *.sh
+
+#project ignore
+*.json
