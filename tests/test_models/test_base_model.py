@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel_init(unittest.TestCase):
+    """unittest for baseModel class init"""
     def setUp(self):
         self.obj = BaseModel()
 
@@ -19,12 +20,35 @@ class TestBaseModel_init(unittest.TestCase):
         self.assertNotEqual(BaseModel().id, self.obj.id)
 
     def test_different_time(self):
-        sleep(1)
+        sleep(0.1)
         self.assertLess(self.obj.created_at, BaseModel().created_at)
         self.assertLess(self.obj.updated_at, BaseModel().updated_at)
 
+    def test_str_repr(self):
+        str_obj = str(self.obj)
+
+        self.assertIn("[BaseModel]", str_obj)
+        self.assertIn("({})".format(self.obj.id), str_obj)
+        self.assertIn("created_at", str_obj)
+        self.assertIn("updated_at", str_obj)
+
+class TestBaseModel_save(unittest.TestCase):
+    """unittest for BaseModel class save method"""
+    def setUp(self):
+        self.obj = BaseModel()
+
+    def test_correct_type(self):
+        self.obj.save()
+        self.assertEqual(datetime, type(self.obj.updated_at))
+
+    def test_different_time(self):
+        time_before_save = self.obj.updated_at
+        sleep(0.1)
+        self.obj.save()
+        self.assertLess(time_before_save, self.obj.updated_at)
 
 class TestBaseModel_to_dict(unittest.TestCase):
+    """unittest for baseModel class to_dict method"""
     def setUp(self):
         self.obj = BaseModel()
 
