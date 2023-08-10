@@ -32,6 +32,33 @@ class TestBaseModel_init(unittest.TestCase):
         self.assertIn("created_at", str_obj)
         self.assertIn("updated_at", str_obj)
 
+    def test_kwargs_output(self):
+        json_model = self.obj.to_dict()
+        new_obj = BaseModel(**json_model)
+
+        self.assertDictEqual(new_obj.to_dict(), self.obj.to_dict())
+
+    def test_args_kwargs_output(self):
+        json_model = self.obj.to_dict()
+        new_obj = BaseModel(5, **json_model)
+
+        self.assertDictEqual(new_obj.to_dict(), self.obj.to_dict())
+
+    def test_kwargs_no_class(self):
+        json_model = self.obj.to_dict()
+        new_obj = BaseModel(**json_model)
+ 
+        self.assertNotIn("__class__", new_obj.__dict__)
+
+    def test_kwargs_correct_type(self):
+        json_model = self.obj.to_dict()
+        new_obj = BaseModel(**json_model)
+
+        self.assertEqual(str, type(new_obj.id))
+        self.assertEqual(datetime, type(new_obj.created_at))
+        self.assertEqual(datetime, type(new_obj.updated_at))
+
+
 class TestBaseModel_save(unittest.TestCase):
     """unittest for BaseModel class save method"""
     def setUp(self):
