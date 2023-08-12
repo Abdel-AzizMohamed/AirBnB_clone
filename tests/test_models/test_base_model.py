@@ -47,7 +47,7 @@ class TestBaseModel_init(unittest.TestCase):
     def test_kwargs_no_class(self):
         json_model = self.obj.to_dict()
         new_obj = BaseModel(**json_model)
- 
+
         self.assertNotIn("__class__", new_obj.__dict__)
 
     def test_kwargs_correct_type(self):
@@ -73,6 +73,7 @@ class TestBaseModel_save(unittest.TestCase):
         sleep(0.1)
         self.obj.save()
         self.assertLess(time_before_save, self.obj.updated_at)
+
 
 class TestBaseModel_to_dict(unittest.TestCase):
     """unittest for baseModel class to_dict method"""
@@ -106,12 +107,12 @@ class TestBaseModel_to_dict(unittest.TestCase):
     def test_output(self):
         current_time = datetime.now()
         time_convert = current_time.isoformat()
-        
+
         self.obj.id = "1"
         self.obj.created_at = self.obj.updated_at = current_time
-        
+
         check_dict = {"__class__": "BaseModel", "id": "1",
-                     "created_at": time_convert, "updated_at": time_convert}
+                      "created_at": time_convert,
+                      "updated_at": time_convert}
 
         self.assertDictEqual(self.obj.to_dict(), check_dict)
-
