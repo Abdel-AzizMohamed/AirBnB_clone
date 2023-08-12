@@ -3,12 +3,13 @@
 import cmd
 import models
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
     """Define a command line object"""
     prompt = "(hbnb) "
-    classes = {"BaseModel": BaseModel}
+    classes = {"BaseModel": BaseModel, "User": User}
 
     def emptyline(self):
         """Do nothing in empty line input."""
