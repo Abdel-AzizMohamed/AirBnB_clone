@@ -4,6 +4,7 @@ import unittest
 from datetime import datetime
 from time import sleep
 from models.base_model import BaseModel
+import models
 
 
 class TestBaseModel_init(unittest.TestCase):
@@ -74,6 +75,11 @@ class TestBaseModel_save(unittest.TestCase):
         self.obj.save()
         self.assertLess(time_before_save, self.obj.updated_at)
 
+    def test_save_updates_file(self):
+        models.storage.save()
+        obj_key = "BaseModel.{}".format(self.obj.id)
+        with open("main.json", "r") as r:
+            self.assertIn(obj_key, r.read())
 
 class TestBaseModel_to_dict(unittest.TestCase):
     """unittest for baseModel class to_dict method"""

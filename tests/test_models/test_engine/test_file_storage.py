@@ -7,6 +7,18 @@ from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
 
+class TestFileStorage_init(unittest.TestCase):
+    """Unittests for testing instantiation of the FileStorage class."""
+
+    def test_with_args(self):
+        with self.assertRaises(TypeError):
+            FileStorage(None)
+
+    def test_correct_type(self):
+        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
+        self.assertEqual(FileStorage, type(FileStorage()))
+
 class TestFileStorage_all(unittest.TestCase):
     """unittest for baseModel class init"""
     def setUp(self):
