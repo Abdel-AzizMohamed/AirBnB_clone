@@ -7,6 +7,10 @@ class HBNBCommand(cmd.Cmd):
     """Define a command line object"""
     prompt = "(hbnb) "
 
+    def emptyline(self):
+        """Do nothing in empty line input."""
+        pass
+
     def do_quit(self, line):
         """Quit command to exit the program"""
         return True
