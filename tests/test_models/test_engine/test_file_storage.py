@@ -21,7 +21,6 @@ class TestFileStorage_all(unittest.TestCase):
     def test_correct_type(self):
         self.assertEqual(dict, type(self.data))
 
-
     def test_extra_arguments(self):
         with self.assertRaises(TypeError):
             self.file.all(None)
@@ -37,7 +36,7 @@ class TestFileStorage_new(unittest.TestCase):
         self.file = FileStorage()
         self.data = self.file.all()
         self.obj = BaseModel()
-    
+
     def tearDown(self):
         if os.path.exists(self.file_path):
             os.remove(self.file_path)
