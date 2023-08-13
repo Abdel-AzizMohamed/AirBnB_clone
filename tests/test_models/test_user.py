@@ -22,3 +22,6 @@ class TestUser_init(unittest.TestCase):
         self.assertEqual("", self.user_obj.first_name)
         self.assertEqual("", self.user_obj.last_name)
 
+
+if __name__ == "__main__":
+    unittest.main()

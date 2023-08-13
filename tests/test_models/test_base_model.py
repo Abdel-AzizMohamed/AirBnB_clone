@@ -12,6 +12,9 @@ class TestBaseModel_init(unittest.TestCase):
     def setUp(self):
         self.obj = BaseModel()
 
+    def test_new_instance_stored_in_objects(self):
+        self.assertIn(BaseModel(), models.storage.all().values())
+
     def test_attributes_type(self):
         self.assertEqual(str, type(self.obj.id))
         self.assertEqual(datetime, type(self.obj.created_at))
@@ -81,6 +84,7 @@ class TestBaseModel_save(unittest.TestCase):
         with open("main.json", "r") as r:
             self.assertIn(obj_key, r.read())
 
+
 class TestBaseModel_to_dict(unittest.TestCase):
     """unittest for baseModel class to_dict method"""
     def setUp(self):
@@ -122,3 +126,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
                       "updated_at": time_convert}
 
         self.assertDictEqual(self.obj.to_dict(), check_dict)
+
+
+if __name__ == "__main__":
+    unittest.main()

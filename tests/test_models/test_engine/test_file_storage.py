@@ -10,6 +10,9 @@ from models.base_model import BaseModel
 class TestFileStorage_init(unittest.TestCase):
     """Unittests for testing instantiation of the FileStorage class."""
 
+    def test_instantiation_no_args(self):
+        self.assertEqual(type(FileStorage()), FileStorage)
+
     def test_with_args(self):
         with self.assertRaises(TypeError):
             FileStorage(None)
@@ -18,6 +21,7 @@ class TestFileStorage_init(unittest.TestCase):
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
         self.assertEqual(FileStorage, type(FileStorage()))
+
 
 class TestFileStorage_all(unittest.TestCase):
     """unittest for baseModel class init"""
@@ -134,3 +138,7 @@ class TestFileStorage_reload(unittest.TestCase):
         base_id = self.base_obj.id
 
         self.assertIn("BaseModel.{}".format(base_id), obj_data)
+
+
+if __name__ == "__main__":
+    unittest.main()
