@@ -37,4 +37,5 @@ class FileStorage():
                 json_data = json.load(r)
                 for obj in json_data.values():
                     obj_class = obj["__class__"]
+                    del obj["__class__"]
                     self.new(eval(obj_class)(**obj))

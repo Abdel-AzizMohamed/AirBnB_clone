@@ -9,22 +9,19 @@ class BaseModel():
     """Define a base object"""
     def __init__(self, *args, **kwargs):
         """Initalize a new object"""
-        if not kwargs:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-            models.storage.new(self)
+        self.id = str(uuid4())
+        self.created_at = datetime.today()
+        self.updated_at = datetime.today()
+
+        if len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    convert = datetime.fromisoformat(value)
+                    self.__dict__[key] = convert
+                else:
+                    self.__dict__[key] = value
         else:
-            json_model = dict(kwargs)
-            convert_create = datetime.fromisoformat(json_model["created_at"])
-            convert_update = datetime.fromisoformat(json_model["updated_at"])
-
-            json_model["created_at"] = convert_create
-            json_model["updated_at"] = convert_update
-            del json_model["__class__"]
-
-            for key, value in json_model.items():
-                setattr(self, key, value)
+            models.storage.new(self)
 
     def __str__(self):
         """Return the string representation of the object"""
