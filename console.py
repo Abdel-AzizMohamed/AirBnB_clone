@@ -114,9 +114,9 @@ class HBNBCommand(cmd.Cmd):
 
             if obj_key not in data:
                 print("** no instance found **")
-            elif len(line) == 2:
+            elif len(line_split) == 2:
                 print("** attribute name missing **")
-            elif len(line) == 3:
+            elif len(line_split) == 3:
                 print("** value missing **")
             else:
                 obj = models.storage._FileStorage__objects[obj_key]
