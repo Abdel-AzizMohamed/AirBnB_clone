@@ -81,6 +81,7 @@ class HBNBCommand(cmd.Cmd):
             Prints all string representation of all
             instances based or not on the class name
         """
+        models.storage.reload()
         data = models.storage.all()
         objects = []
 
