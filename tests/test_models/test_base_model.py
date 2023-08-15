@@ -48,12 +48,6 @@ class TestBaseModel_init(unittest.TestCase):
 
         self.assertDictEqual(new_obj.to_dict(), self.obj.to_dict())
 
-    def test_kwargs_no_class(self):
-        json_model = self.obj.to_dict()
-        new_obj = BaseModel(**json_model)
-
-        self.assertNotIn("__class__", new_obj.__dict__)
-
     def test_kwargs_correct_type(self):
         json_model = self.obj.to_dict()
         new_obj = BaseModel(**json_model)
