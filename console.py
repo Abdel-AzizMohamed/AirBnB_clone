@@ -87,14 +87,14 @@ class HBNBCommand(cmd.Cmd):
 
         if line == "":
             for value in data.values():
-                objects.append(value)
+                objects.append(value.__str__())
             print(objects)
         elif line not in self.classes:
             print("** class doesn't exist **")
         else:
             for key, value in data.items():
                 if line in key:
-                    objects.append(value)
+                    objects.append(value.__str__())
                 print(objects)
             
 
