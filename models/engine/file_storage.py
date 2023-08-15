@@ -18,7 +18,7 @@ class FileStorage():
     def new(self, obj):
         """add object to __objects dict"""
         obj_class = obj.__class__.__name__
-        FileStorage.__objects.update({"{}.{}".format(obj_class, obj.id): obj})
+        FileStorage.__objects["{}.{}".format(obj_class, obj.id)] = obj
 
     def save(self):
         """
@@ -33,7 +33,7 @@ class FileStorage():
     def reload(self):
         """deserializes the JSON file to __objects"""
         if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r") as r:
+            with open(FileStorage.__file_path) as r:
                 json_data = json.load(r)
                 for obj in json_data.values():
                     obj_class = obj["__class__"]
