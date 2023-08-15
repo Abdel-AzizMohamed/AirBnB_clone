@@ -9,6 +9,7 @@ class BaseModel():
     """Define a base object"""
     def __init__(self, *args, **kwargs):
         """Initalize a new object"""
+        time_form = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid4())
         self.created_at = datetime.today()
         self.updated_at = datetime.today()
@@ -16,7 +17,7 @@ class BaseModel():
         if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
-                    convert = datetime.fromisoformat(value)
+                    convert = datetime.strptime(value, time_form)
                     self.__dict__[key] = convert
                 else:
                     self.__dict__[key] = value
