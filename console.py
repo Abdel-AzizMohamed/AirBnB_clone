@@ -4,12 +4,19 @@ import cmd
 import models
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """Define a command line object"""
     prompt = "(hbnb) "
-    classes = {"BaseModel": BaseModel, "User": User}
+    classes = {"BaseModel": BaseModel, "User": User, "State": State,
+               "City": City, "Amenity": Amenity,
+               "Place": Place, "Review": Review}
 
     def emptyline(self):
         """Do nothing in empty line input."""
@@ -33,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
             print(obj.id)
         else:
             print("** class doesn't exist **")
-        
+
     def do_show(self, line):
         """Prints the string representation of an instance"""
 
@@ -75,7 +82,6 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-
     def do_all(self, line):
         """
             Prints all string representation of all
@@ -96,7 +102,6 @@ class HBNBCommand(cmd.Cmd):
                 if line in key:
                     objects.append(value.__str__())
                 print(objects)
-            
 
     def do_update(self, line):
         """Deletes an instance"""
